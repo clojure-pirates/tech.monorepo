@@ -36,13 +36,18 @@
 
 (defn tech-clone
   ([]
-   (mapv tech-clone +libraries+))
+   (println "CLONING TECH")
+   (mapv (fn [id]
+           (print id "...")
+           (tech-clone id)
+           (println " DONE")) +libraries+))
   ([id]
    (if-not (fs/exists? (tech-repo id))
      (git :clone :uri (tech-url id) :directory (tech-repo id)))))
 
 (defn tech-copy
   ([]
+   (println "COPY TECH")
    (doall (for [id  +libraries+
                 dir +dirs+]
             (tech-copy id dir))))
@@ -63,8 +68,4 @@
       (tech-copy)))
 
 (comment
-  
-  (tech-init)
-  
-    
-  )
+  (tech-init))

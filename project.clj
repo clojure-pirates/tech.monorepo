@@ -3,6 +3,7 @@
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :source-paths ["dev" "src"]
   :profiles {:dev {:plugins [[lein-ancient "0.6.15"]
                              [lein-exec "0.3.7"]
                              [cider/cider-nrepl "0.18.0"]]
