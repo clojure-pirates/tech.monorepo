@@ -2,9 +2,11 @@
   (:require [hara.lib.jgit :refer [git] :as git]
             [hara.io.file :as fs]))
 
-(def +url+ "https://github.com/techascent/%s.git")
+(def +library-url+ "https://github.com/techascent/%s.git")
 
-(def +libraries+
+(def +library-path+ "original")
+
+(def +library+
   ["tech.datatype"
    "tech.compute"
    "tech.datatype.tablesaw"
@@ -24,15 +26,15 @@
    "tech.mxnet"
    "tvm-clj"])
 
-(def +dirs+ ["src" "java" "test"])
+(def +dir+ ["src" "java" "test"])
 
 (defn tech-url
   [id]
-  (format +url+ id))
+  (format +library-url+ id))
 
 (defn tech-repo
   [id & more]
-  (apply str "original/" id more))
+  (apply str +library-path+ "/" id more))
 
 (defn tech-clone
   ([]
@@ -40,27 +42,21 @@
    (mapv (fn [id]
            (print id "...")
            (tech-clone id)
-           (println " DONE")) +libraries+))
+           (println " DONE")) +library+))
   ([id]
    (if-not (fs/exists? (tech-repo id))
      (git :clone :uri (tech-url id) :directory (tech-repo id)))))
 
 (defn tech-copy
   ([]
-   (println "COPY TECH")
-   (doall (for [id  +libraries+
-                dir +dirs+]
+   (println "COPYING TECH")
+   (doall (for [id  +library+
+                dir +dir+]
             (tech-copy id dir))))
   ([id dir]
-   (let [source-root  (fs/path (tech-repo id) "/" dir)
-         files (fs/select source-root
-                          {:include [fs/file?]})]
-     (mapv (fn [source]
-             (let [path    (fs/relativize source-root source)
-                   target  (fs/path dir path)]
-               (fs/copy-single  source target
-                                {:options #{:replace-existing}})))
-           files))))
+   (let [source (tech-repo id "/" dir)]
+     (fs/copy-into source dir {:include [fs/file?]
+                               :options #{:replace-existing}}))))
 
 (defn tech-init
   []
