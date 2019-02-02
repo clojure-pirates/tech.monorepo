@@ -1,4 +1,4 @@
-(defproject tech/monorepo "0.1.4"
+(defproject tech/monorepo "0.1.5"
   :description "libraries for machine learning"
   :url "http://www.github.com/techascent/tech.monorepo"
   :license {:name "MIT License"}
