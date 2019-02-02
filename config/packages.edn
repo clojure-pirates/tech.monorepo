@@ -1,0 +1,90 @@
+{tech/core.config
+ {:description  "configuration for tech"
+  :include      [[tech.core.config     :complete]]
+  :dependencies [environ/environ
+                 org.clojure/java.classpath
+                 org.clojure/spec.alpha
+                 org.clojure/core.specs.alpha]}
+
+ tech/core.jna
+ {:description  "jna for tech"
+  :include      [[tech.core.jna   :complete]]
+  :dependencies [net.java.dev.jna/jna]}
+
+ tech/core.parallel
+ {:description  "resource management for tech"
+  :include      [[tech.core.parallel   :complete]]
+  :dependencies [org.clojure/core.async]}
+
+ tech/core.resource
+ {:description  "resource management for tech"
+  :include      [[tech.core.resource   :complete]]}
+  
+ tech/compute
+ {:description  "computation for tech"
+  :bundle       [{:path "target/classes"  :include ["tech/compute"]}]}
+
+ tech/datatype
+ {:description  "data manipulation for tech"
+  :include      [[tech.datatype   :complete]]
+  :dependencies [net.mikera/core.matrix
+                 net.mikera/vectorz-clj]}
+ 
+ tech/io
+ {:description  "io operations for tech"
+  :include      [[tech.io   :complete]]
+  :dependencies [clj-commons/fs
+                 com.taoensso/nippy  
+                 com.taoensso/timbre]}
+ 
+ tech/ml
+ {:description  "io operations for tech"
+  :include      [[tech.ml   :complete]]
+  :dependencies [camel-snake-kebab
+                 org.apache.commons/commons-math3]}
+ 
+ tech/lib.fastutil
+ {:description "fastutil wrapper for tech"
+  :include      [[tech.lib.fastutil  :complete]]
+  :dependencies [it.unimi.dsi/fastutil]}
+ 
+ tech/lib.javacpp
+ {:description "javacpp wrapper for tech"
+  :include      [[tech.lib.javacpp  :complete]]
+  :dependencies [org.bytedeco/javacpp]}
+ 
+ tech/lib.mxnet
+ {:description "tablesaw wrapper for tech"
+  :include      [[tech.lib.mxnet  :complete]]
+  :dependencies [org.apache.mxnet.contrib.clojure/clojure-mxnet-linux-cpu]}
+ 
+ tech/lib.opencv
+ {:description "opencv wrapper for tech"
+  :include      [[tech.lib.opencv  :complete]]
+  :dependencies [org.bytedeco.javacpp-presets/opencv-platform]}
+ 
+ tech/lib.smile
+ {:description "smile wrapper for tech"
+  :include      [[tech.lib.smile  :complete]]
+  :dependencies [com.github.haifengl/smile-core]
+  :bundle       [{:path "target/classes"  :include ["smile"]}]}
+
+ tech/lib.tablesaw
+ {:description "tablesaw wrapper for tech"
+  :include      [[tech.lib.tablesaw  :complete]]
+  :dependencies [tech.tablesaw/tablesaw-core]}
+ 
+ tech/lib.svm
+ {:description "tablesaw wrapper for tech"
+  :include      [[tech.lib.svm  :complete]]
+  :bundle       [{:path "target/classes"  :include ["tech/lib/svm"]}]}
+ 
+ tech/lib.tvm
+ {:description "tablesaw wrapper for tech"
+  :include      [[tech.lib.tvm  :complete]]
+  :bundle       [{:path "target/classes"  :include ["tvm_clj"]}]}
+ 
+ tech/lib.xgboost
+ {:description "xgboost wrapper for tech"
+  :include      [[tech.lib.xgboost  :complete]]
+  :dependencies [me.lyh/xgboost4j]}}

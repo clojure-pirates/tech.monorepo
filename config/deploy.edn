@@ -1,0 +1,13 @@
+{:dependencies    [:project :dependencies]
+ 
+ :packages        [:include "config/packages.edn" {:type :edn}]
+ 
+ :releases        {:public  [:include "config/deploy/tech.public.edn" {:type :edn}]
+                   :dev     [:include "config/deploy/tech.dev.edn" {:type :edn}]}
+ 
+ :signing         ;; {:key [:include "config/keys/test@test.com" {:type :gpg}]}
+                  {:key [:include [:str ["config/keys/" [:global :hara.email] ".secured"]]
+                                  {:type :gpg :secured true}]}
+
+ :repositories    ;; [:include "config/repositories.edn" {:type :edn}]
+                  [:include "config/repositories.edn.secured" {:type :edn :secured true}]}

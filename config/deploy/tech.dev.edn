@@ -1,0 +1,24 @@
+{:type       :maven
+ :repository "clojars"
+ :manifest   [;; library
+              tech/core.jna
+              tech/core.config
+              tech/core.resource
+              tech/core.parallel
+              
+              ;tech/aws
+              ;tech/datatype
+              ;tech/compute
+              ;tech/io
+              ;tech/ml
+              
+              ;; lib
+              ;tech/lib.fastutil
+              ;tech/lib.javacpp
+              ;tech/lib.opencv
+              ;tech/lib.mxnet
+              ;tech/lib.smile
+              ;tech/lib.tablesaw
+              ;tech/lib.tvm
+              ;tech/lib.xgboost
+              ]}
