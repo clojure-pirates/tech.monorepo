@@ -22,6 +22,7 @@
   
  tech/compute
  {:description  "computation for tech"
+  :include      [[tech.compute   :complete]]
   :bundle       [{:path "target/classes"  :include ["tech/compute"]}]}
 
  tech/datatype

@@ -7,7 +7,7 @@
   :profiles {:dev {:plugins [[lein-ancient "0.6.15"]
                              [lein-exec "0.3.7"]
                              [cider/cider-nrepl "0.18.0"]]
-                   :dependencies [[hara/code       "3.0.5"]
+                   :dependencies [[hara/code      "3.0.5"]
                                   [hara/deploy    "3.0.5"]
                                   [hara/io.file   "3.0.5"]
                                   [hara/lib.jgit  "3.0.5"]
