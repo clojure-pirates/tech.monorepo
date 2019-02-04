@@ -1,4 +1,4 @@
-(ns tech.aws.sqs-test
+(ns ^:aws tech.aws.sqs-test
   (:require [clojure.test :refer :all]
             [tech.queue.protocols :as q]
             [tech.queue.worker-test :as worker-test]

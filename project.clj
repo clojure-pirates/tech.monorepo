@@ -1,4 +1,4 @@
-(defproject tech/monorepo "0.1.5"
+(defproject tech/monorepo "5.0.0"
   :description "libraries for machine learning"
   :url "http://www.github.com/techascent/tech.monorepo"
   :license {:name "MIT License"}
@@ -92,4 +92,10 @@
                  [tech.tablesaw/tablesaw-core "0.30.2"]
 
                  ;; lib.xgboost
-                 [me.lyh/xgboost4j "0.72-20180627-1214081f"]])
+                 [me.lyh/xgboost4j "0.72-20180627-1214081f"]]
+
+  :test-selectors {:default (fn [arg]
+                              (and (not (:cuda arg))
+                                   (not (:aws arg))))
+                   :cuda :cuda
+                   :aws :aws})

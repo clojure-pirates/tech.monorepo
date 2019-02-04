@@ -146,21 +146,25 @@
 
 
 (deftest new-ops-return-base-container-when-possible
+  ;;This test only works with the base cpu drivers.  The tvm cpu drivers produce different datatypes
+  ;;than the default.
   (testing "Test that ->tensor and new-tensor return the base container when possible."
-    (let [test-tensor (ct/->tensor [1 2 3 4])]
-      (is (instance? (Class/forName "[D") test-tensor)))
-    (let [test-device (-> (ct-defaults/infer-stream ())
-                          (compute-drv/get-device))]
-      (is (compute-drv/acceptable-device-buffer? test-device (double-array 5)))
-      (is (compute-drv/acceptable-device-buffer? test-device (dtype/make-buffer-of-type :float32 5)))
-      (is (compute-drv/acceptable-device-buffer? test-device (dtype/make-typed-buffer :float32 5)))
-      (is (compute-drv/acceptable-device-buffer? test-device (dtype-jna/make-typed-pointer :float32 5))))
-    ;;We can override the base container used for the cpu system in a function call
-    (let [test-tensor (ct/->tensor [1 2 3 4] :container-fn dtype-jna/make-typed-pointer)]
-      (is (dtype-jna/typed-pointer? test-tensor)))
-    (let [test-tensor (ct/->tensor [[1 2 3 4]] :container-fn dtype-jna/make-typed-pointer)]
-      (is (ct/tensor? test-tensor))
-      (is (= [1 4] (ct/shape test-tensor))))))
+    (with-bindings {#'tech.compute.registry/*cpu-driver-name* (atom (-> (driver)
+                                                                        compute-drv/driver-name))}
+      (let [test-tensor (ct/->tensor [1 2 3 4])]
+        (is (instance? (Class/forName "[D") test-tensor)))
+      (let [test-device (-> (ct-defaults/infer-stream ())
+                            (compute-drv/get-device))]
+        (is (compute-drv/acceptable-device-buffer? test-device (double-array 5)))
+        (is (compute-drv/acceptable-device-buffer? test-device (dtype/make-buffer-of-type :float32 5)))
+        (is (compute-drv/acceptable-device-buffer? test-device (dtype/make-typed-buffer :float32 5)))
+        (is (compute-drv/acceptable-device-buffer? test-device (dtype-jna/make-typed-pointer :float32 5))))
+      ;;We can override the base container used for the cpu system in a function call
+      (let [test-tensor (ct/->tensor [1 2 3 4] :container-fn dtype-jna/make-typed-pointer)]
+        (is (dtype-jna/typed-pointer? test-tensor)))
+      (let [test-tensor (ct/->tensor [[1 2 3 4]] :container-fn dtype-jna/make-typed-pointer)]
+        (is (ct/tensor? test-tensor))
+        (is (= [1 4] (ct/shape test-tensor)))))))
 
 
 (def-double-float-test cholesky-decomp

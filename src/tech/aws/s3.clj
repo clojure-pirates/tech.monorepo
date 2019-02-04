@@ -1,4 +1,4 @@
-(ns tech.aws.s3
+(ns ^:aws tech.aws.s3
   "Access to s3 resources via the io provider abstraction"
   (:require [amazonica.aws.s3 :as s3]
             [amazonica.aws.s3transfer :as s3transfer]

@@ -1,4 +1,4 @@
-(ns tech.aws.s3-test
+(ns ^:aws tech.aws.s3-test
   (:require [tech.aws.s3]
             [tech.io :as io]
             [tech.io.temp-file :as temp-file]

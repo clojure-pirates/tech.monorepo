@@ -1,4 +1,4 @@
-(ns tech.aws.sqs
+(ns ^:aws tech.aws.sqs
   "Provider for amazon sqs"
   (:require [amazonica.aws.sqs :as sqs]
             [tech.queue.protocols :as q-proto]
