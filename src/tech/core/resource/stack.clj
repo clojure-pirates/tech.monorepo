@@ -2,7 +2,9 @@
   "Implementation of stack based resource system.  Simple, predictable, deterministic,
   and applicable to most problems.  Resource contexts are sequences of resources that
   need to be, at some point, released."
-  (:import [java.lang Runnable]))
+  (:import [java.lang Runnable]
+           [java.io Closeable]
+           [java.lang AutoCloseable]))
 
 
 (defprotocol PResource
@@ -22,6 +24,10 @@
         (release-resource item)
         (instance? Runnable item)
         (.run ^Runnable item)
+        (instance? Closeable item)
+        (.close ^Closeable item)
+        (instance? AutoCloseable item)
+        (.close ^AutoCloseable item)
         :else
         (item))
      (catch Throwable e
